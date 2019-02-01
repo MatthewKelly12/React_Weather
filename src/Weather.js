@@ -3,28 +3,32 @@ import axios from 'axios'
 
 class Weather extends Component {
 	state = {
-		people: []
+		weather: {}
 	}
 	componentDidMount() {
-		return axios.get("https://swapi.co/api/people")
-		.then(r => {
-		  console.log(r.data.results)
-		  this.setState({people: r.data.results})
-		})
+		return axios.get('http://api.openweathermap.org/data/2.5/weather?zip=37027&units=imperial&APPID=25e989bd41e3e24ce13173d8126e0fd6')
+		.then(response => {
+			// CREATE OBJECT TO HOLD WEATHER DATA
+			const weatherData = {
+				'city': response.data.name,
+				'temp': response.data.main.temp,
+				'humidity':	response.data.main.humidity,
+				'wind': response.data.wind.speed,
+				'description':	response.data.weather[0].description,
+				'icon':response.data.weather[0].icon
+			}
+
+			console.log(weatherData)
+		  	this.setState({weather: weatherData})
+			}
+		)
 	}
 
 	render () {
-			const people = this.state.people
-			console.log(people)
+
 			return (
 				<div>
-					{people.map(p => {
 
-						return(
-							<div>
-								<h1>{p.name}</h1>
-							</div>
-						)})}
 				</div>
 			)
 
