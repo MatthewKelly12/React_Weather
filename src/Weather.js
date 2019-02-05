@@ -6,6 +6,7 @@ class Weather extends Component {
 	render () {
 			const weather = this.props.weather
 			const pic = `http://openweathermap.org/img/w/${weather.icon}.png`
+
 			return (
 				<div>
 					<div>
